@@ -38,3 +38,6 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+# my general testing project (since it's just a console project that will run small segments of code)
+GenTests/
