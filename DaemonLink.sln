@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaemonLink", "DaemonLink\DaemonLink.csproj", "{D23792D8-E624-4463-B311-B0C61055E5CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenTests", "GenTests\GenTests.csproj", "{CE421E78-E5C1-49CE-9240-8A165C47535A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D23792D8-E624-4463-B311-B0C61055E5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23792D8-E624-4463-B311-B0C61055E5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23792D8-E624-4463-B311-B0C61055E5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23792D8-E624-4463-B311-B0C61055E5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE421E78-E5C1-49CE-9240-8A165C47535A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE421E78-E5C1-49CE-9240-8A165C47535A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE421E78-E5C1-49CE-9240-8A165C47535A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE421E78-E5C1-49CE-9240-8A165C47535A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
