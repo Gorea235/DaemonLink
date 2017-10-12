@@ -7,6 +7,7 @@ namespace DaemonLink
 {
     public class Server : IDisposable
     {
+        bool _disposed = false;
         readonly TcpListener _server;
 
         public int Port => ((IPEndPoint)_server.LocalEndpoint).Port;
@@ -18,11 +19,12 @@ namespace DaemonLink
         public Server(int port = 0)
         {
             _server = new TcpListener(new IPEndPoint(IPAddress.Loopback, port));
+            _server.Start();
         }
 
         public void Run()
         {
-            _server.Start();
+            if (_disposed) throw new ObjectDisposedException("Server has already been disposed of");
             while (true)
             {
                 try
@@ -38,7 +40,7 @@ namespace DaemonLink
                             string[] args = new string[nargs];
                             for (int i = 0; i < nargs; i++)
                                 args[i] = conn.RecvMessageString();
-                            
+
                             // setup redirect classes
                             DText.DStdOut nOut = new DText.DStdOut(conn);
                             DText.DStdIn nIn = new DText.DStdIn(conn);
@@ -85,13 +87,17 @@ namespace DaemonLink
                     throw ex;
                 }
             }
-            _server.Stop();
         }
 
         public void Dispose()
         {
-            _server.Stop();
-            Closed?.Invoke(this, new EventArgs());
+            if (!_disposed)
+            {
+                _server.Stop();
+                _server.Server.Dispose();
+                Closed?.Invoke(this, new EventArgs());
+                _disposed = true;
+            }
         }
     }
 }

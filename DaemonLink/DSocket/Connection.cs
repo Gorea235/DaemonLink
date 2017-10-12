@@ -49,15 +49,13 @@ namespace DaemonLink.DSocket
             // for arguments, send an int specifying the number of bytes
             // then send the rest of the content (this is fine unless the
             // arguments are 4.8GB in size, which i doubt)
-            using (NetworkStream stream = _conn.GetStream())
-            {
-                if (code != MessageCode.None)
-                    _WriteBytes(stream, new[] { (byte)code });
-                if (code == MessageCode.Arguments)
-                    _WriteBytes(stream, BitConverter.GetBytes(content.Length));
-                if (content != null)
-                    _WriteBytes(stream, content);
-            }
+            NetworkStream stream = _conn.GetStream();
+            if (code != MessageCode.None)
+                _WriteBytes(stream, new[] { (byte)code });
+            if (code == MessageCode.Arguments)
+                _WriteBytes(stream, BitConverter.GetBytes(content.Length));
+            if (content != null)
+                _WriteBytes(stream, content);
         }
 
         public MessageCode RecvMessage() => (MessageCode)RecvMessageBytes(1)[0];
@@ -75,19 +73,21 @@ namespace DaemonLink.DSocket
         public byte[] RecvMessageBytes(int n)
         {
             _AssertDisposed();
-            using (NetworkStream stream = _conn.GetStream())
-            {
-                int read = 0;
-                byte[] buffer = new byte[n];
-                while (read < n)
-                    read = stream.Read(buffer, read, n - read);
-                return buffer;
-            }
+            NetworkStream stream = _conn.GetStream();
+            int read = 0;
+            byte[] buffer = new byte[n];
+            while (read < n)
+                read = stream.Read(buffer, read, n - read);
+            return buffer;
         }
 
         public void Dispose()
         {
-            _conn.Dispose();
+            if (!_disposed)
+            {
+                _conn.Dispose();
+                _disposed = true;
+            }
         }
 
         void _AssertDisposed()

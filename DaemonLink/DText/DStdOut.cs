@@ -16,11 +16,11 @@ namespace DaemonLink.DText
 
         public bool AutoFlush => true;
 
-		public DStdOut(Connection conn)
-		{
-			_conn = conn;
-			_defWriter = Console.Out;
-		}
+        public DStdOut(Connection conn)
+        {
+            _conn = conn;
+            _defWriter = Console.Out;
+        }
 
         public void EnableRedirect()
         {
