@@ -1,10 +1,16 @@
 ﻿using System;
 
-namespace DaemonLink
+namespace DaemonLink.DSocket
 {
-    enum MessageCodes
+    enum MessageCode : byte
     {
         // Communication messages
+
+        /// <summary>
+        /// A special value that states no message code will be sent, just the
+        /// content.
+        /// </summary>
+        None = 0x00,
         /// <summary>
         /// States that the client is sending the arguments from the
         /// command line.
@@ -29,19 +35,14 @@ namespace DaemonLink
         /// <summary>
         /// States that the client should read from StdIn.
         /// </summary>
-        ReadLine = 0x21,
+        ReadChar = 0x21,
 
         // Control messages
         /// <summary>
-        /// States that the server has finished processing the arguments
-        /// successfully.
+        /// States that the server has finished processing the arguments and
+        /// that it has sent the status code.
         /// </summary>
-        Done = 0xf0,
-        /// <summary>
-        /// States that the server found a problem with the arguments and that
-        /// execution wasn't successful.
-        /// </summary>
-        Failed = 0xf1,
+        Finished = 0xf0,
         /// <summary>
         /// States that the server had an unexpected error and crashed.
         /// </summary>

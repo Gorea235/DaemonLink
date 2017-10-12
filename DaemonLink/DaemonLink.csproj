@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="DSocket\" />
+    <Folder Include="DText\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="DSocket\SClient.cs" />
